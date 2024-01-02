@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Client</title>
+</head>
+<body>
+    <nav >
+        <ul class = "menu" >
+            <li><a id="search" href="/search_clients">Search Client</a></li>
+            <li><a id="register" href="/new_client">Register Client</a></li>
+            <li><a id="doctor" href="/available_doctors">Check Availability</a></li>
+            <li><a id="dashboard" href="/">Dashboard</a></li>
+        </ul>
+
+    </nav>    
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+
+    <h1>New Client</h1>
+    <form method="post" action="{{ url_for('new_client') }}">
+        <input type="text" name="VAT" placeholder="VAT">
+        <input type="text" name="name" placeholder="Name">
+        <input type="text" name="birth-date" placeholder="Birth-Date (____-__-__)">
+        <input type="text" name="street" placeholder="Street">
+        <input type="text" name="city" placeholder="City">
+        <input type="text" name="zip" placeholder="Zip (____-___)">
+        <input type="text" name="gender" placeholder="Gender (M/F/O)">
+        <input type="submit" value="Sign up">
+    </form>
+    {% if existing_vat %}
+        <p>Client already exists, <a href="{{ url_for('new_client', vat=vat) }}">Search Client</a>.</p>
+    {% endif %}
+</body>
+</html>

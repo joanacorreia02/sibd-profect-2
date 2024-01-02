@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Consultation - Prescription</title>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a id="search" href="/search_clients">Search Client</a></li>
+            <li><a id="register" href="/new_client">Register Client</a></li>
+            <li><a id="doctor" href="/available_doctors">Check Availability</a></li>
+            <li><a id="dashboard" href="/">Dashboard</a></li>
+        </ul>
+    </nav>
+
+    {% for message in get_flashed_messages() %}
+      {{ message }}
+    {% endfor %}
+    
+    <h1>New Consultation - Prescription</h1>
+
+    <form method="post" action="{{ url_for('new_consultation_prescription', diagnostic_id=diagnostic_id, vat_doctor=vat_doctor, consultation_date=consultation_date, med_lab_list=med_lab_list) }}">
+        <label for="available_medication">Existing Medication:</label>
+        <select name="med_select" id="med_select">
+            {% for medication in med_lab_list %}
+                <option value="{{ medication.name}}">{{ medication.name }}-{{ medication.lab }} </option>
+            {% endfor %}
+        </select>
+
+    <form method="post" action="{{ url_for('new_consultation_prescription', diagnostic_id=diagnostic_id, vat_doctor=vat_doctor, consultation_date=consultation_date, med_lab_list=med_lab_list) }}">
+        <label for="med_name">Medication Name:</label>
+        <input type="text" name="med_name" id="med_name" required>
+
+        <label for="med_lab">Medication Lab:</label>
+        <input type="text" name="med_lab" id="med_lab" required>
+
+        <label for="dosage">Dosage:</label>
+        <input type="text" name="dosage" id="dosage" required>
+
+        <label for="prescription_desc">Prescription Description:</label>
+        <textarea name="prescription_desc" id="prescription_desc" rows="4" required></textarea>
+
+        <input type="submit" value="Submit Prescription">
+    </form>
+
+    <form method="get" action="{{ url_for('new_consultation_diagnostic', vat_doctor=vat_doctor, consultation_date=consultation_date) }}">
+        <input type="submit" value="Go back to Insert Diagnostic">
+    </form>
+</body>
+</html>

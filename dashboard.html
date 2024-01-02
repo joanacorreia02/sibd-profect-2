@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <title>Dashboard</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #dashboard {
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<p><div id="dashboard">
+    <h1>Total Consultations</h1>
+    
+    <table id="totalconsultationsTable">
+        <thead>
+            <tr>
+                <th>Total Consultations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for total in total_consultations %}
+            <tr>
+                <td>{{ total['total_consultations'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></p></body>
+
+<!-- a partir daqui é outra cenaaaaaaaa--> 
+
+    <h1>Consultations Dashboard</h1>
+
+<form method="post" >
+    <label for="start_date">Start Date:</label>
+    <input type="date" id="start_date" name="start_date" required>
+
+    <label for="end_date">End Date:</label>
+    <input type="date" id="end_date" name="end_date" required>
+
+    <button type="submit">Filter</button>
+</form>
+{% if consults_by_interval %}
+    <table>
+        <thead>
+            <tr>
+                <th>VAT</th>
+                <th>Date</th>
+                <th>Zip Code</th>
+                <th>Diagnostic Codes</th>
+                <th>Procedures</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for interval in consults_by_interval %}
+            <tr>
+                <td>{{ interval['VAT'] }}</td>
+                <td>{{ interval['date'] }}</td>
+                <td>{{ interval['zip'] }}</td>
+                <td>{{ interval['num_diagnostic_codes'] }}</td>
+                <td>{{ interval['num_procedures'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+
+<!-- a partir daqui é outra cenaaaaaaaa-->
+<!-- a partir daqui é outra cenaaaaaaaa-->
+<body>
+    
+<p><div id="dashboard">
+    <h1>Consultations by year</h1>
+    
+    <table id="consultations_by_year">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Total Consultations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for year in consults_by_year %}
+            <tr>
+                <td>{{ year['year'] }}</td>
+                <td>{{ year['total_consultations'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></p>
+</body>
+    
+<!--<body>
+    
+<p><div id="dashboard">
+    <h1>Consultations Dashboard</h1>
+    
+    <table id="consultationsTable">
+        <thead>
+            <tr>
+                <th>VAT</th>
+                <th>Date</th>
+                <th>Zip Code</th>
+                <th>Diagnostic Codes</th>
+                <th>Procedures</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in consultations_data %}
+            <tr>
+                <td>{{ item['VAT'] }}</td>
+                <td>{{ item['date'] }}</td>
+                <td>{{ item['zip'] }}</td>
+                <td>{{ item['num_diagnostic_codes'] }}</td>
+                <td>{{ item['num_procedures'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></p>
+</body>-->
+
+<body>
+    
+<p><div id="dashboard">
+    <h1>Consultations by Client</h1>
+    
+    <table id="consultationsTable">
+        <thead>
+            <tr>
+                <th>VAT</th>
+                <th>Total Consultations</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for client in consults_by_client %}
+            <tr>
+                <td>{{ client['VAT'] }}</td>
+                <td>{{ client['total_consultations'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></p>
+</body>
+
+
+
+    
+</html>

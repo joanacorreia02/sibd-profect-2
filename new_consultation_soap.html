@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Consultation - SOAP Notes</title>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a id="search" href="/search_clients">Search Client</a></li>
+            <li><a id="register" href="/new_client">Register Client</a></li>
+            <li><a id="doctor" href="/available_doctors">Check Availability</a></li>
+            <li><a id="dashboard" href="/">Dashboard</a></li>
+        </ul>
+    </nav> 
+
+    {% for message in get_flashed_messages() %}
+      {{ message }}
+    {% endfor %}
+    
+    <h1>New Consultation - SOAP Notes</h1>
+
+    <form method="post">
+        <label for="soap_s">SOAP S:</label>
+        <textarea name="soap_s" id="soap_s" rows="4" required></textarea>
+
+        <label for="soap_o">SOAP O:</label>
+        <textarea name="soap_o" id="soap_o" rows="4" required></textarea>
+
+        <label for="soap_a">SOAP A:</label>
+        <textarea name="soap_a" id="soap_a" rows="4" required></textarea>
+
+        <label for="soap_p">SOAP P:</label>
+        <textarea name="soap_p" id="soap_p" rows="4" required></textarea>
+
+        <input type="submit" value="Next: Insert Nurses">
+    </form>
+</body>
+</html>

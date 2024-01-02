@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Doctors</title>
+</head>
+<body>
+    <nav >
+        <ul class = "menu" >
+            <li><a id="search" href="/search_clients">Search Client</a></li>
+            <li><a id="register" href="/new_client">Register Client</a></li>
+            <li><a id="doctor" href="/available_doctors">Check Availability</a></li>
+            <li><a id="dashboard" href="/dashboard">Dashboard</a></li>
+        </ul>
+
+    </nav>
+    <h1>Available Doctors</h1>
+    <form method="post">
+        <!-- Add input fields for date and time -->
+        <label for="date">Date:</label>
+        <input type="date" name="date" required>
+        <label for="time">Time:</label>
+        <input type="time" name="time" required>
+
+        <input type="submit" value="Check Availability">
+    </form>
+
+    {% if available_doctors %}
+        <h2>Available Doctors for {{ date }} at {{ time }}</h2>
+        <ul>
+            {% for doctor in available_doctors %}
+                <li>{{ doctor.name }} (VAT: {{ doctor.vat }})</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

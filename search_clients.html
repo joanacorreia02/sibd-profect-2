@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Clients</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>  <!--Titulo,logo e menu-->    
+        <nav >
+            <ul class = "menu" >
+                <li><a id="search" href="/search_clients">Search Client</a></li>
+                <li><a id="register" href="/new_client">Register Client</a></li>
+                <li><a id="doctor" href="/">Check Availability</a></li>
+                <li><a id="dashboard" href="/dashboard">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+
+    <h1>Search Clients</h1>
+    <form method="post" action="{{ url_for('search_clients') }}" >
+        <br>
+        <p><label>VAT</label></p>
+        <input 
+            type="text"
+            name="vat"
+            placeholder="e.g. 111111111"
+        />
+        <br>
+        <p><label>Name</label></p>
+        <input
+            type="text"
+            name="name" 
+            placeholder="e.g. João Carlos"
+        />
+        <br>
+        <p><label>Street</label></p>
+        <input 
+            type="text" 
+            name="street" 
+            placeholder="e.g. Rua do Brasil, 15"
+        />
+        <br>
+        <p><label>Zip Code</label></p>
+        <input 
+            type="text" 
+            name="zip" 
+            placeholder="e.g. 0000-000"
+        />
+        <br>
+        <p><label>City</label></p>
+        <input 
+            type="text" 
+            name="city" 
+            placeholder="eg. Lisbon"
+        />
+        <br>
+        <input type="submit" value="Search">
+        
+    </form>
+    {% if clients %}
+    <h2>Matching Clients</h2>
+    <ul>
+        {% for client in clients %}
+            <li>
+                {{ client.name }} - 
+                <a href="{{ url_for('client_appointments', vat=client.vat) }}">Appointments/Consultation</a>
+                - <a href="{{ url_for('new_appointment', vat=client.vat) }}">New Appointment</a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+         <p>No matching VAT for a client, <a href="{{ url_for('new_client', vat=vat) }}">New Client</a>?</p>
+    {% endif %}
+</body>
+</html>
